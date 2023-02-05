@@ -1,0 +1,33 @@
+.header {
+  position: sticky;
+  top: 0;
+  padding: 10px 30px;
+  background: #fff;
+}
+.header__logo {
+  color: #ef3124;
+  font-size: 32px;
+  line-height: 32px;
+  font-weight: bold;
+  text-decoration: none;
+}
+.header__logo:hover {
+  opacity: .8;
+}
+.header__menu {
+  display: flex;
+  justify-content: flex-end;
+  cursor: pointer;
+}
+.header__menu_text {
+  margin: 0 0 0 10px;
+  font-weight: bold;
+  font-size: 32px;
+  line-height: 25px;
+}
+
+@media (max-width: 960px) { 
+  .header__menu_text {
+    display: none;
+  }
+}
