@@ -8,9 +8,7 @@ export const Page:FC = () => {
   return (
     <div className={cls.page}>
       <Header />
-      <div className="wrapper">
         <Outlet />
-      </div>
       <Footer/>
     </div>
   )
