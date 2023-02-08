@@ -5,3 +5,18 @@
   line-height: 16px;
   opacity: .25;
 }
+.footer__link {
+  color: #000;
+}
+.footer__content {
+  display: flex;
+  justify-content: space-between;
+}
+.footer__mainpage {
+  position: absolute;
+  bottom: 0;
+  opacity: 1;
+  display: flex;
+  width: 100%;
+  align-items: center;
+}

@@ -1,0 +1,43 @@
+.promo {
+  width: 100%;
+}
+.promo__block {
+  display: flex;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-position: left top;
+  background-repeat: no-repeat;
+  background-size: cover;
+  text-decoration: none;
+}
+.promo__block:before {
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  content: '';
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.promo__block:hover::before {
+  opacity: .2;
+}
+.promo__alfa {
+  background-image: url("~/public/images/promo1.jpg");
+}
+.promo__custom {
+  background-image: url("~/public/images/promo2.jpg");
+}
+.promo__title {
+  padding: 20px 30px;
+  color: #000;
+}
+@media (max-width: 600px) {
+  .promo__block {
+    min-height: 500px;
+  }
+}

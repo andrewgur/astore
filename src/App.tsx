@@ -1,22 +1,25 @@
 import React from 'react';
 import { Route, Routes } from 'react-router';
 import { Page } from './components/Page/Page';
+import { PAGE_ALFA, PAGE_CART, PAGE_CONTACTS, PAGE_CUSTOM, PAGE_POLICY } from './constants/pages';
 import { AlfaMadePage } from './pages/AlfaMadePage';
 import { CartPage } from './pages/CartPage';
 import { ContactsPage } from './pages/ContactsPage';
 import { CustomMadePage } from './pages/CustomMadePage';
 import { HomePage } from './pages/HomePage';
 import { NotFound } from './pages/NotFound';
+import { PolicyPage } from './pages/PolicyPage';
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Page />}>
         <Route index element={<HomePage />} />
-        <Route path="/by-alfa" element={<AlfaMadePage />}/>
-        <Route path="/custom" element={<CustomMadePage />}/>
-        <Route path="/contacts" element={<ContactsPage />}/>
-        <Route path="/cart" element={<CartPage />}/>
+        <Route path={PAGE_ALFA} element={<AlfaMadePage />}/>
+        <Route path={PAGE_CUSTOM} element={<CustomMadePage />}/>
+        <Route path={PAGE_CONTACTS} element={<ContactsPage />}/>
+        <Route path={PAGE_CART} element={<CartPage />}/>
+        <Route path={PAGE_POLICY} element={<PolicyPage />}/>
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
