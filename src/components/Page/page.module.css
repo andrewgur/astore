@@ -6,3 +6,29 @@
   display: grid;
   grid-template-rows: auto 1fr auto;
 }
+.page__header {
+  font-size: 110px!important;
+  line-height: 130px!important;
+  font-weight: 700!important;
+  letter-spacing: -2.5px;
+}
+.page__text {
+  font-size: 20px;
+  line-height: 24px!important;
+  font-weight: 400!important;
+  --font-family-styrene: 'StyreneA',Arial,sans-serif;
+}
+
+@media (max-width: 1024px) {
+    .page__header {
+    font-size: 90px!important;
+    line-height: 110px!important;
+  }
+}
+
+@media (max-width: 960px) { 
+  .page__header {
+    font-size: 70px!important;
+    line-height: 90px!important;
+  }
+}
