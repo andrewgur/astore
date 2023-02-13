@@ -47,6 +47,9 @@
   font-weight: 700;
   letter-spacing: 1px;
 }
+.menu__list_link_active {
+  opacity: .7;
+}
 .menu__footer_text {
   display: block;
 }

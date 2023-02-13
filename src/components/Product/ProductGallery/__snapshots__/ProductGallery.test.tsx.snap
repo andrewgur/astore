@@ -1,0 +1,150 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProductGallery Component should match snapshot 1`] = `
+<div>
+  <div
+    class="image__gallery"
+  >
+    <div
+      aria-live="polite"
+      class="image-gallery gallery"
+    >
+      <div
+        class="image-gallery-content bottom"
+      >
+        <div
+          class="image-gallery-slide-wrapper bottom"
+        >
+          <div
+            class="image-gallery-swipe"
+          >
+            <div
+              class="image-gallery-slides"
+            >
+              <div
+                aria-label="Go to Slide 1"
+                class="image-gallery-slide  center "
+                role="button"
+                style="display: inherit; transform: translate3d(0%, 0, 0);"
+                tabindex="-1"
+              >
+                <img
+                  alt=""
+                  class="image-gallery-image"
+                  height=""
+                  loading="eager"
+                  sizes=""
+                  src="1.jpg"
+                  srcset=""
+                  title=""
+                  width=""
+                />
+              </div>
+              <div
+                aria-label="Go to Slide 2"
+                class="image-gallery-slide  right "
+                role="button"
+                style="display: inherit; transform: translate3d(100%, 0, 0);"
+                tabindex="-1"
+              >
+                <img
+                  alt=""
+                  class="image-gallery-image"
+                  height=""
+                  loading="eager"
+                  sizes=""
+                  src="2.jpg"
+                  srcset=""
+                  title=""
+                  width=""
+                />
+              </div>
+              <div
+                aria-label="Go to Slide 3"
+                class="image-gallery-slide  left "
+                role="button"
+                style="display: inherit; transform: translate3d(-100%, 0, 0);"
+                tabindex="-1"
+              >
+                <img
+                  alt=""
+                  class="image-gallery-image"
+                  height=""
+                  loading="eager"
+                  sizes=""
+                  src="3.jpg"
+                  srcset=""
+                  title=""
+                  width=""
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="image-gallery-thumbnails-wrapper bottom thumbnails-swipe-horizontal"
+        >
+          <div
+            class="image-gallery-thumbnails"
+          >
+            <nav
+              aria-label="Thumbnail Navigation"
+              class="image-gallery-thumbnails-container"
+              style="transform: translate3d(0px, 0, 0); transition: all 450ms ease-out;"
+            >
+              <button
+                aria-label="Go to Slide 1"
+                aria-pressed="true"
+                class="image-gallery-thumbnail active"
+                tabindex="0"
+                type="button"
+              >
+                <span
+                  class="image-gallery-thumbnail-inner"
+                >
+                  <img
+                    class="image-gallery-thumbnail-image"
+                    src="1.jpg"
+                  />
+                </span>
+              </button>
+              <button
+                aria-label="Go to Slide 2"
+                aria-pressed="false"
+                class="image-gallery-thumbnail"
+                tabindex="0"
+                type="button"
+              >
+                <span
+                  class="image-gallery-thumbnail-inner"
+                >
+                  <img
+                    class="image-gallery-thumbnail-image"
+                    src="2.jpg"
+                  />
+                </span>
+              </button>
+              <button
+                aria-label="Go to Slide 3"
+                aria-pressed="false"
+                class="image-gallery-thumbnail"
+                tabindex="0"
+                type="button"
+              >
+                <span
+                  class="image-gallery-thumbnail-inner"
+                >
+                  <img
+                    class="image-gallery-thumbnail-image"
+                    src="3.jpg"
+                  />
+                </span>
+              </button>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

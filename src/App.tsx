@@ -9,14 +9,18 @@ import { CustomMadePage } from './pages/CustomMadePage';
 import { HomePage } from './pages/HomePage';
 import { NotFound } from './pages/NotFound';
 import { PolicyPage } from './pages/PolicyPage';
+import { ProductPage } from './pages/ProductPage';
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Page />}>
         <Route index element={<HomePage />} />
-        <Route path={PAGE_ALFA} element={<AlfaMadePage />}/>
-        <Route path={PAGE_CUSTOM} element={<CustomMadePage />}/>
+        <Route path={PAGE_ALFA} element={<AlfaMadePage />} />
+        <Route path={PAGE_CUSTOM} >
+          <Route index element={<CustomMadePage />} />
+          <Route path=':id' element={<ProductPage />} />
+        </Route>
         <Route path={PAGE_CONTACTS} element={<ContactsPage />}/>
         <Route path={PAGE_CART} element={<CartPage />}/>
         <Route path={PAGE_POLICY} element={<PolicyPage />}/>

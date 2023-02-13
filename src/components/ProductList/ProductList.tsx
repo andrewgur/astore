@@ -10,7 +10,7 @@ type ProductListProps = {
 
 export const ProductList: FC<ProductListProps> = ({ products }) => {
   return (
-    <Grid.Row justify='left' className={cls.productList}>
+    <Grid.Row justify='left' className={cls.productList} dataTestId='ProductList'>
       {products.map(product => (
         <Grid.Col width={{mobile: 12, tablet: 6, desktop: 4}} key={product.id} dataTestId="ProductListItem">
           <ProductListItem {...product} />

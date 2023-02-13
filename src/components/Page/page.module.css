@@ -6,6 +6,9 @@
   display: grid;
   grid-template-rows: auto 1fr auto;
 }
+.page__header_container {
+  margin: 40px 0 0 0;
+}
 .page__header {
   font-size: 110px!important;
   line-height: 130px!important;
@@ -13,7 +16,7 @@
   letter-spacing: -2.5px;
 }
 .page__text {
-  font-size: 20px;
+  font-size: 20px!important;
   line-height: 24px!important;
   font-weight: 400!important;
   --font-family-styrene: 'StyreneA',Arial,sans-serif;
