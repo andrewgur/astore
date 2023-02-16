@@ -13,7 +13,9 @@ describe('ProductListItem component', () => {
     preview: 'imagePreviewFile.jpg',
     title: 'Product #1',
     price: 111,
-    availability: true
+    availability: true,
+    images: [],
+    description: 'product description'
   };
 
   render(<BrowserRouter><ProductListItem {...fakeProduct} /></BrowserRouter>)

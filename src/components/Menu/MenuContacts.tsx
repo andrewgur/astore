@@ -10,11 +10,10 @@ type MenuContactsProps = {
 export const MenuContacts: FC<MenuContactsProps> = ({ items }) => {
   return (
     <ul className={cls.menu__social}>
-      {items.map((item, index) => {
-        const Icon:FC<any> = item.icon;
+      {items.map(({ icon: Icon, title, params, link }) => {
         return(
-          <li className={cls.menu__social_item} key={item.title}>
-            <a href={item.link} title={item.title} {...item.params}>
+          <li className={cls.menu__social_item} key={title}>
+            <a href={link} title={title} {...params}>
               <Circle backgroundColor='#fff' size={32}>
                 <Icon color='#000' className={cls.menu__social_icon} />
               </Circle>

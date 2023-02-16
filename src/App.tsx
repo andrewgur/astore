@@ -16,7 +16,10 @@ function App() {
     <Routes>
       <Route path="/" element={<Page />}>
         <Route index element={<HomePage />} />
-        <Route path={PAGE_ALFA} element={<AlfaMadePage />} />
+        <Route path={PAGE_ALFA}>
+          <Route index element={<AlfaMadePage />} />
+          <Route path=':id' element={<ProductPage />} />
+        </Route>
         <Route path={PAGE_CUSTOM} >
           <Route index element={<CustomMadePage />} />
           <Route path=':id' element={<ProductPage />} />

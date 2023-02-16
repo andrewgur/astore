@@ -4,12 +4,11 @@ export type ProductItemType = {
   title: string;
   price: number;
   availability: boolean;
-};
-export type ProductGroupType = ProductItemType & {
   images: string[];
-  subtitle?: string;
   description: string;
+  subtitle?: string;
+  stickerNumbers?: number[];
+  models?: string[];
   colors?: string[];
   sizes?: string[];
-  stickerNumbers?: number[];
 };

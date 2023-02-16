@@ -29,8 +29,30 @@
   max-height: 745px;
 }
 
+@media (max-width: 1200px) { 
+  .image__gallery {
+    width: 440px;
+  }
+  .image-gallery-content .image-gallery-slide .image-gallery-image {
+    max-height: 585px;
+  }
+}
 @media (max-width: 960px) { 
   .image__gallery {
     margin: 0 auto;
+    width: 350px;
+  }
+  .image-gallery-content .image-gallery-slide .image-gallery-image {
+    max-height: 485px;
   }
 }
+@media (max-width: 768px) { 
+  .image__gallery {
+    width: 600px;
+  }
+  .image-gallery-content .image-gallery-slide .image-gallery-image {
+    max-height: 800px;
+  }
+}
+
+

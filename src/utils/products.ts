@@ -1,12 +1,11 @@
-import { ProductGroupType } from '../types/Product';
-import groupsMock from '../mock/groups.json';
+import { ProductItemType } from '../types/Product';
+import productsMock from '../mock/products.json';
 import { ReactImageGalleryItem } from 'react-image-gallery';
 
-export const getProduct = (id: number): ProductGroupType | undefined => {
-  const { groups } = groupsMock;
+export const getProduct = (id: number): ProductItemType | undefined => {
+  const products: ProductItemType[] = productsMock.products.concat(productsMock.customProducts);
 
-  return groups
-    .reduce<ProductGroupType[]>((acc, group) => acc.concat(group.products), [])
+  return products
     .find(product => product.id === id);
 };
 

@@ -5,6 +5,6 @@ export type MenuItemType = {
   title: string;
 };
 export type MenuContactsType = MenuItemType & {
-  icon: FC;
+  icon: FC<any>;
   params?: React.HTMLProps<HTMLAnchorElement>;
 };

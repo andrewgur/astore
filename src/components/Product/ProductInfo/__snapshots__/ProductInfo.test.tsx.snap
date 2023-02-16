@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProductGallery Component should redner props 1`] = `
+<div>
+  <div
+    class="productInfo"
+  >
+    <h1
+      class="typography__component_1c381 productInfo__title typography__styrene-medium_17h0l typography__medium_1c381"
+    />
+    <div
+      class="productInfo__price"
+    >
+       ₽
+    </div>
+    <form
+      action="#"
+    >
+      <button
+        class="button__component_4vwd7 button__m_4vwd7 button__component_re924 button__primary_re924 productInfo__button"
+        type="submit"
+      >
+        <span
+          class="button__text_4vwd7 button__stretchText_4vwd7"
+        >
+          В корзину
+        </span>
+      </button>
+    </form>
+    <p
+      class="typography__paragraphWithMargins_9xfoj productInfo__description typography__primary-medium_9xfoj"
+    />
+  </div>
+</div>
+`;
+
+exports[`ProductGallery Component shouldn't redner props 1`] = `
+<div>
+  <div
+    class="productInfo"
+  >
+    <h1
+      class="typography__component_1c381 productInfo__title typography__styrene-medium_17h0l typography__medium_1c381"
+    />
+    <div
+      class="productInfo__price"
+    >
+       ₽
+    </div>
+    <form
+      action="#"
+    >
+      <button
+        class="button__component_4vwd7 button__m_4vwd7 button__component_re924 button__primary_re924 productInfo__button"
+        type="submit"
+      >
+        <span
+          class="button__text_4vwd7 button__stretchText_4vwd7"
+        >
+          В корзину
+        </span>
+      </button>
+    </form>
+    <p
+      class="typography__paragraphWithMargins_9xfoj productInfo__description typography__primary-medium_9xfoj"
+    />
+  </div>
+</div>
+`;
