@@ -5,14 +5,14 @@ import { ProductListItem } from './ProductListItem/ProductListItem';
 import cls from './productList.module.css';
 
 type ProductListProps = {
-  products: ProductItemType[]
-}
+  products: ProductItemType[];
+};
 
 export const ProductList: FC<ProductListProps> = ({ products }) => {
   return (
     <Grid.Row justify='left' className={cls.productList} dataTestId='ProductList'>
       {products.map(product => (
-        <Grid.Col width={{mobile: 12, tablet: 6, desktop: 4}} key={product.id} dataTestId="ProductListItem">
+        <Grid.Col width={{ mobile: 12, tablet: 6, desktop: 4 }} key={product.id} dataTestId="ProductListItem">
           <ProductListItem {...product} />
         </Grid.Col>)
       )}
