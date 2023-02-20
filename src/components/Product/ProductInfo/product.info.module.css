@@ -43,6 +43,9 @@
   line-height: 1.5;
   font-weight: 400;
 }
+.productInfo__form {
+  max-width: 250px;
+}
 
 @media (max-width: 960px){
   .productInfo {

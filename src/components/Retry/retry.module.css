@@ -1,0 +1,19 @@
+.retry {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 100%;
+  height: calc(100% - 300px);
+  margin: 70px auto 0;
+}
+.retry__title {
+  text-align: center;
+  font-size: 20px;
+  display: block;
+  margin: 0 0 40px;
+}
+
+.retry__button {
+  width: 300px;
+  margin: 0 auto;
+}
