@@ -1,78 +1,105 @@
 import { FC } from 'react';
 import { Typography } from '@alfalab/core-components/typography';
 import { Button } from '@alfalab/core-components/button';
-import { Field, Form, Formik } from 'formik';
+import { useFormik } from 'formik';
+import { SelectResponsive } from '@alfalab/core-components/select/responsive';
 import cls from './product.info.module.css';
+import { OptionShape } from '@alfalab/core-components/select/typings';
 
 type ProductInfoProps = {
   title: string;
   price: number;
   description: string;
-  stickerNumbers?: number[];
-  models?: string[];
-  colors?: string[];
-  sizes?: string[];
+  stickerNumbers?: OptionShape[];
+  models?: OptionShape[];
+  colors?: OptionShape[];
+  sizes?: OptionShape[];
 };
 
-type SelectBlockType = {
+type SelectListItemType = {
+  name: 'colors' | 'stickerNumbers' | 'models' | 'colors' | 'sizes';
   label: string;
-  values: string[] | number[];
-  name: string;
+  options: OptionShape[] | undefined;
+};
+
+type initialValuesType = {
+  stickerNumbers?: OptionShape;
+  models?: OptionShape;
+  colors?: OptionShape;
+  sizes?: OptionShape;
 };
 
 export const ProductInfo: FC<ProductInfoProps> = ({ title, price, description, stickerNumbers, models, colors, sizes }) => {
 
-  const SelectBlock: FC<SelectBlockType> = ({ label, values, name }) => {
-    return (
-      <div className={cls.productInfo__selectBlock}>
-        <label className={cls.productInfo__label}>{label}</label>
-        <Field as="select" name={name} aria-label={name} className={cls.productInfo__select}>
-          {values.map((value) => <option key={value} value={value}>{value}</option>)}
-        </Field>
-      </div>
-    );
-  };
+  const selectList: SelectListItemType[] = [
+    {
+      name: 'colors',
+      label: 'цвет',
+      options: colors
+    },
+    {
+      name: 'stickerNumbers',
+      label: 'номер стикера',
+      options: stickerNumbers
+    },
+    {
+      name: 'models',
+      label: 'модель',
+      options: models
+    },
+    {
+      name: 'sizes',
+      label: 'размер',
+      options: sizes
+    },
+  ];
+
+  const initialValues = selectList.reduce((acc: initialValuesType, item: SelectListItemType) => {
+    if (item.options?.length) {
+      acc[item.name] = item.options[0];
+    }
+    return acc;
+  }, {});
+
+  const formik = useFormik({
+    initialValues,
+    onSubmit: (form) => {
+      console.log(form);
+    }
+  });
 
   return (
     <div className={cls.productInfo}>
       <Typography.Title className={cls.productInfo__title} tag='h1'>{title}</Typography.Title>
       <div className={cls.productInfo__price}>{price} ₽</div>
-      <Formik
-        initialValues={{}}
-        onSubmit={() => { }}
-      >
-        <Form>
-          {colors && colors.length &&
-            <SelectBlock
-              label='цвет'
-              name='colors'
-              values={colors}
-            />
+      <form className={cls.productInfo__form} onSubmit={formik.handleSubmit}>
+        {selectList.map(item => {
+          if (item.options?.length) {
+            return (
+              <SelectResponsive
+                dataTestId={item.name}
+                key={item.name}
+                options={item.options}
+                block={true}
+                name={item.name}
+                label={item.label}
+                labelView='outer'
+                optionsSize='s'
+                onChange={(option) => formik.setFieldValue(item.name, option.selected)}
+                selected={formik.values[item.name]}
+              />
+            );
           }
-          {sizes && sizes.length &&
-            <SelectBlock
-              label='размер'
-              name='sizes'
-              values={sizes}
-            />
-          }
-          {stickerNumbers && stickerNumbers.length &&
-            <SelectBlock
-              label='номер стикера'
-              name='stickerNumbers'
-              values={stickerNumbers}
-            />
-          }
-          {models && models.length &&
-            <SelectBlock
-              label='модель'
-              name='models'
-              values={models}
-            />
-          }
-          <Button className={cls.productInfo__button} type='submit' view='primary'>В корзину</Button>
-        </Form>
-      </Formik>
+        }
+        )}
+        <Button
+          className={cls.productInfo__button}
+          type='submit'
+          view='primary'
+        >
+          В корзину
+        </Button>
+      </form>
       <Typography.Text className={cls.productInfo__description} tag='p'>{description}</Typography.Text>
     </div>
   );

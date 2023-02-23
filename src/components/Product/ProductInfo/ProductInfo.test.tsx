@@ -1,9 +1,14 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { configure, render, screen } from '@testing-library/react';
 import { ProductInfo } from './ProductInfo';
 import product from './../../../mock/product.json';
+import { arrToOptions } from 'utils/products';
 
 describe('ProductGallery Component', () => {
+
+  configure({
+    testIdAttribute: 'data-test-id'
+  });
 
   const { title, price, description, stickerNumbers, colors, sizes } = product;
 
@@ -12,10 +17,10 @@ describe('ProductGallery Component', () => {
       title={title}
       price={price}
       description={description}
-      colors={colors}
-      sizes={sizes}
+      colors={arrToOptions(colors)}
+      sizes={arrToOptions(sizes)}
       models={[]}
-      stickerNumbers={stickerNumbers}
+      stickerNumbers={arrToOptions(stickerNumbers)}
     />
   );
 
@@ -31,7 +36,7 @@ describe('ProductGallery Component', () => {
     expect(priceElem).toBeInTheDocument();
 
     ['colors', 'sizes', 'stickerNumbers'].map(name => {
-      const element = screen.getByRole('combobox', { name: name });
+      const element = screen.getByTestId(name);
       expect(element).toBeInTheDocument();
     });
 
@@ -39,7 +44,7 @@ describe('ProductGallery Component', () => {
 
   it('shouldn\'t redner props', () => {
     setup();
-    const element = screen.queryByRole('combobox', { name: 'models' });
+    const element = screen.queryByTestId('models');
     expect(element).not.toBeInTheDocument();
   });
 });

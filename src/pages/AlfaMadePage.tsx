@@ -1,10 +1,24 @@
-import React, { FC } from 'react';
+import React, { FC, useCallback, useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '../store';
+import { fetchProducts, hasErrorSelector, isLoadingSelector, productsSelector } from '../store/page-alfa';
 import { PageHeader } from '../components/Page/PageHeader';
 import { ProductList } from '../components/ProductList/ProductList';
-import productsMock from '../mock/products.json';
+import { Loader } from 'components/Loader/Loader';
+import { Retry } from 'components/Retry/Retry';
 
 export const AlfaMadePage: FC = () => {
-  const { products } = productsMock;
+  const dispatch = useAppDispatch();
+  const isLoading = useAppSelector(isLoadingSelector);
+  const hasError = useAppSelector(hasErrorSelector);
+  const products = useAppSelector(productsSelector);
+
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, [dispatch]);
+
+  const retryHandler = useCallback(() => {
+    dispatch(fetchProducts());
+  }, [dispatch]);
 
   return (
     <div className='wrapper'>
@@ -12,7 +26,15 @@ export const AlfaMadePage: FC = () => {
         title='Сделано в Альфе'
         description='Хотим каждую из этих вещей! Себе, родным и друзьям'
       />
-      <ProductList products={products} />
+      {hasError &&
+        <Retry retryHandler={retryHandler} />
+      }
+      {isLoading &&
+        <Loader />
+      }
+      {!hasError && !isLoading &&
+        <ProductList products={products} />
+      }
     </div>
   );
 };
