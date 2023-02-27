@@ -19,7 +19,7 @@ describe('ProductGallery Component', () => {
   ];
 
   it('should match snapshot', () => {
-    const { container } = render(<ProductGallery images={images} />)
-    expect(container).toMatchSnapshot()
+    const { container } = render(<ProductGallery images={images} />);
+    expect(container).toMatchSnapshot();
   });
 });

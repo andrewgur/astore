@@ -1,0 +1,33 @@
+.cart__item {
+  margin: 0 0 30px;
+}
+.cart__item_img {
+  display: block;
+  width: 70px;
+  height: 70px;
+  border-radius: 7px;
+  background-size: cover;
+  background-position: center;
+}
+.cart__item_title {
+  font-size: 16px;
+  line-height: 27px;
+  font-weight: 600;
+  overflow: hidden;
+}
+.cart__item_options {
+  opacity: .7;
+  font-size: 12px;
+  font-weight: 400;
+}
+.cart__item_price {
+  text-align: center;
+}
+.cart__item_remove {
+  cursor: pointer;
+  padding: 3px 5px;
+  font-size: 10px;
+  line-height: 12px;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+}
