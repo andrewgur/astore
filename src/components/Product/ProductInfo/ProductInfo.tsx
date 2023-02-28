@@ -1,10 +1,12 @@
 import { FC } from 'react';
 import { Typography } from '@alfalab/core-components/typography';
 import { Button } from '@alfalab/core-components/button';
-import { useFormik } from 'formik';
+import { FormikValues, useFormik } from 'formik';
 import { SelectResponsive } from '@alfalab/core-components/select/responsive';
-import cls from './product.info.module.css';
 import { OptionShape } from '@alfalab/core-components/select/typings';
+import { ProductCartOptions } from 'types/Product';
+import cls from './product.info.module.css';
+import { TITLE_COLORS, TITLE_MODELS, TITLE_SIZES, TITLE_STICKER_NUMBERS } from 'constants/product';
 
 type ProductInfoProps = {
   title: string;
@@ -14,6 +16,7 @@ type ProductInfoProps = {
   models?: OptionShape[];
   colors?: OptionShape[];
   sizes?: OptionShape[];
+  handleAdd: (data: ProductCartOptions) => void;
 };
 
 type SelectListItemType = {
@@ -22,39 +25,39 @@ type SelectListItemType = {
   options: OptionShape[] | undefined;
 };
 
-type initialValuesType = {
+export type FormDataType = {
   stickerNumbers?: OptionShape;
   models?: OptionShape;
   colors?: OptionShape;
   sizes?: OptionShape;
 };
 
-export const ProductInfo: FC<ProductInfoProps> = ({ title, price, description, stickerNumbers, models, colors, sizes }) => {
+export const ProductInfo: FC<ProductInfoProps> = ({ title, price, description, stickerNumbers, models, colors, sizes, handleAdd }) => {
 
   const selectList: SelectListItemType[] = [
     {
       name: 'colors',
-      label: 'цвет',
+      label: TITLE_COLORS,
       options: colors
     },
     {
       name: 'stickerNumbers',
-      label: 'номер стикера',
+      label: TITLE_STICKER_NUMBERS,
       options: stickerNumbers
     },
     {
       name: 'models',
-      label: 'модель',
+      label: TITLE_MODELS,
       options: models
     },
     {
       name: 'sizes',
-      label: 'размер',
+      label: TITLE_SIZES,
       options: sizes
     },
   ];
 
-  const initialValues = selectList.reduce((acc: initialValuesType, item: SelectListItemType) => {
+  const initialValues = selectList.reduce((acc: FormDataType, item: SelectListItemType) => {
     if (item.options?.length) {
       acc[item.name] = item.options[0];
     }
@@ -63,8 +66,13 @@ export const ProductInfo: FC<ProductInfoProps> = ({ title, price, description, s
 
   const formik = useFormik({
     initialValues,
-    onSubmit: (form) => {
-      console.log(form);
+    onSubmit: (values: FormikValues) => {
+      const data = Object.entries(values)
+        .reduce((acc: ProductCartOptions, item) => {
+          acc[item[0] as keyof ProductCartOptions] = item[1].content;
+          return acc;
+        }, {});
+      handleAdd(data);
     }
   });
 
@@ -76,18 +84,20 @@ export const ProductInfo: FC<ProductInfoProps> = ({ title, price, description, s
         {selectList.map(item => {
           if (item.options?.length) {
             return (
-              <SelectResponsive
-                dataTestId={item.name}
-                key={item.name}
-                options={item.options}
-                block={true}
-                name={item.name}
-                label={item.label}
-                labelView='outer'
-                optionsSize='s'
-                onChange={(option) => formik.setFieldValue(item.name, option.selected)}
-                selected={formik.values[item.name]}
-              />
+              <div key={item.name} className={cls.productInfo__field}>
+                <SelectResponsive
+                  dataTestId={item.name}
+                  key={item.name}
+                  options={item.options}
+                  block={true}
+                  name={item.name}
+                  label={item.label}
+                  labelView='outer'
+                  optionsSize='s'
+                  onChange={(option) => formik.setFieldValue(item.name, option.selected)}
+                  selected={formik.values[item.name]}
+                />
+              </div>
             );
           }
         }
@@ -96,6 +106,7 @@ export const ProductInfo: FC<ProductInfoProps> = ({ title, price, description, s
           className={cls.productInfo__button}
           type='submit'
           view='primary'
+          dataTestId='product-add'
         >
           В корзину
         </Button>

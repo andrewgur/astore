@@ -1,16 +1,17 @@
 import React from 'react';
-import { configure, render, screen } from '@testing-library/react';
+import { configure, fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { ProductInfo } from './ProductInfo';
 import product from './../../../mock/product.json';
 import { arrToOptions } from 'utils/products';
 
-describe('ProductGallery Component', () => {
+describe('ProductInfo Component', () => {
 
   configure({
     testIdAttribute: 'data-test-id'
   });
 
   const { title, price, description, stickerNumbers, colors, sizes } = product;
+  const mockCallback = jest.fn();
 
   const setup = () => render(
     <ProductInfo
@@ -21,6 +22,7 @@ describe('ProductGallery Component', () => {
       sizes={arrToOptions(sizes)}
       models={[]}
       stickerNumbers={arrToOptions(stickerNumbers)}
+      handleAdd={mockCallback}
     />
   );
 
@@ -47,4 +49,14 @@ describe('ProductGallery Component', () => {
     const element = screen.queryByTestId('models');
     expect(element).not.toBeInTheDocument();
   });
+
+  it('should call add handler', async () => {
+    setup();
+    fireEvent.click(screen.getByTestId('product-add'));
+    await waitFor(() => {
+      expect(mockCallback).toHaveBeenCalled();
+    });
+
+  });
+
 });

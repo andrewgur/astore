@@ -18,6 +18,9 @@
 .productInfo__selectBlock {
   margin: 10px 0;
 }
+.productInfo__field {
+  margin: 0 0 15px;
+}
 .productInfo__select {
   font-size: 12px;
   line-height: 1.55;
@@ -44,6 +47,7 @@
   font-weight: 400;
 }
 .productInfo__form {
+  margin: 40px 0 10px 0;
   max-width: 250px;
 }
 

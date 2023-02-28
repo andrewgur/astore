@@ -1,0 +1,58 @@
+.cart {
+  position: fixed;
+  right: 32px;
+  top: 100px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease 0s;
+  cursor: pointer;
+  z-index: 1;
+}
+.cart__active {
+  opacity: 1;
+  pointer-events: all;
+}
+.cart__inner {
+  position: relative;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  background-color: #ef3124;
+  box-shadow: 0px 0px 10px 0px rgb(0 0 0 / 0%);
+  transition: transform 0.2s ease-in-out;
+  will-change: transform;
+}
+.cart__inner:hover {
+  transform: scale(1.1);
+}
+.cart__icon {
+  width: 40px;
+  height: 40px;
+  padding: 18px 20px 22px;
+  stroke: #fff;
+}
+.cart__badge {
+  position: absolute;
+  right: -3px;
+  bottom: -3px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 30px;
+  background-color:#000;
+  color: #fff;
+}
+.cart__tooltip {
+  padding: 12px 10px 8px!important;
+  font-weight: 600!important;
+  font-style: italic;
+  font-size: 15px!important;
+}
+
+@media (max-width: 960px) {
+  .cart {
+    bottom: 50px;
+    top: auto;
+  }
+}

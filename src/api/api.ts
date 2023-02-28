@@ -6,8 +6,6 @@ export const API_INSTANCE = axios.create({
   baseURL: 'http://qa-games.ru/astore/'
 });
 
-//TODO typization
-//TODO try/catch
 export const getProductsAlfa = async (): Promise<ProductItemType[]> => {
   return API_INSTANCE
     .get('/made-in-alfa')
