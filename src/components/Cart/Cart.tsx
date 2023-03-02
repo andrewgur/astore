@@ -1,6 +1,7 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import { useAppDispatch, useAppSelector } from 'store';
 import { cartActions, cartOpenSelector, productsSelector, totalCountSelector, totalPriceSelector } from 'store/cart';
+import { orderActions } from 'store/order/slice';
 import { CartIcon } from './CartIcon/CartIcon';
 import { CartSideBar } from './CartSideBar/CartSideBar';
 
@@ -13,6 +14,10 @@ export const Cart: FC = () => {
 
   const handleClose = () => dispatch(cartActions.setCartOpen(false));
   const handleOpen = () => dispatch(cartActions.setCartOpen(true));
+  const handleNext = () => {
+    dispatch(orderActions.setIsOpen(true));
+    dispatch(cartActions.setCartOpen(false));
+  };
 
   return (
     <>
@@ -27,6 +32,7 @@ export const Cart: FC = () => {
         handleClose={handleClose}
         totalPrice={totalPrice}
         products={products}
+        handleNext={handleNext}
       />
     </>
   );

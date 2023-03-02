@@ -11,9 +11,10 @@ type CartSideBarPropsType = {
   products: ProductCartType[];
   totalPrice: number;
   handleClose: () => void;
+  handleNext: () => void;
 };
 
-export const CartSideBar: FC<CartSideBarPropsType> = ({ open, products, totalPrice, handleClose }) => {
+export const CartSideBar: FC<CartSideBarPropsType> = ({ open, products, totalPrice, handleClose, handleNext }) => {
   return (
     <SidePanelResponsive
       open={open}
@@ -33,7 +34,13 @@ export const CartSideBar: FC<CartSideBarPropsType> = ({ open, products, totalPri
       <SidePanelResponsive.Footer sticky={true}>
         <div className={cls.cart__footer}>
           <div className={cls.cart__total}>Итого: <Amount value={totalPrice} minority={0} currency='RUB' /></div>
-          <Button className={cls.cart__button} block={true}>Дальше</Button>
+          <Button
+            className={cls.cart__button}
+            block={true}
+            onClick={handleNext}
+          >
+            Дальше
+          </Button>
         </div>
       </SidePanelResponsive.Footer>
     </SidePanelResponsive>
