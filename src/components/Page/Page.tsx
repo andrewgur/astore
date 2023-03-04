@@ -1,4 +1,5 @@
 import { Cart } from 'components/Cart/Cart';
+import { Order } from 'components/Order/Order';
 import React, { FC } from 'react';
 import { Outlet } from 'react-router';
 import { Footer } from '../Footer/Footer';
@@ -10,6 +11,7 @@ export const Page: FC = () => {
     <div className={cls.page}>
       <Header />
       <Cart />
+      <Order />
       <Outlet />
       <Footer />
     </div>
