@@ -31,3 +31,13 @@ export type ProductCartType = {
   colors?: string;
   sizes?: string;
 };
+
+export type ProductAPIType = {
+  id: number,
+  totalPrice: number,
+  totalCount: number,
+  sticketNumber?: number;
+  color?: string,
+  size?: string,
+  model?: string,
+};

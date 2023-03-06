@@ -4,8 +4,10 @@ import './styles/index.css';
 import App from './App';
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from 'react-redux';
-import { store } from './store';
+import { persistor, store } from './store';
 import ErrorBoundary from 'components/ErrorBoundary/ErrorBoundary';
+import { Loader } from 'components/Loader/Loader';
+import { PersistGate } from 'redux-persist/integration/react';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -16,7 +18,9 @@ root.render(
     <ErrorBoundary>
       <BrowserRouter>
         <Provider store={store}>
-          <App />
+          <PersistGate loading={<Loader />} persistor={persistor}>
+            <App />
+          </PersistGate>
         </Provider>
       </BrowserRouter>
     </ErrorBoundary>
