@@ -23,9 +23,13 @@
   },
   "include": [
     "src",
-    "decs.d.ts"
+    "decs.d.ts",
+    "./node_modules/redux-persist/types"
   ],
   "exclude": [
     "node_modules"
+  ],
+  "files": [
+    "./node_modules/redux-persist/types/integration/react.d.ts"
   ]
 }

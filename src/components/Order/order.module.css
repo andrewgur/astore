@@ -19,10 +19,15 @@
   padding: 20px 0;
   max-width: 560px;
 }
-.order__form_field {
+.order__form_control {
   margin-bottom: 20px;
+}
+.order__form_field {
   border-radius: 0!important;
   background: none;
+}
+.order__form_err {
+  display: none;
 }
 .order__form_field:hover {
   background: none!important;
@@ -33,6 +38,7 @@
   font-family: 'StyreneA',Arial,sans-serif;
 }
 .order__form_textarea {
+  margin-bottom: 20px;
   padding-top: 17px!important;
   color: #000000;
   border: 1px solid #000000;

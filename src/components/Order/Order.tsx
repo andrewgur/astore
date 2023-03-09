@@ -13,11 +13,13 @@ import { Button } from '@alfalab/core-components/button';
 import { useAppDispatch, useAppSelector } from 'store';
 import { productsSelector, totalPriceSelector } from 'store/cart';
 import { CartList } from 'components/Cart/CartList/CartList';
-import { orderDeliverySelector, orderOpenSelector, orderUserDataSelector } from 'store/order/selectors';
-import { orderActions } from 'store/order/slice';
+import { orderConfirmed, orderDeliverySelector, orderLoading, orderOpenSelector, orderUserDataSelector } from 'store/order/selectors';
+import { orderActions, sendOrder } from 'store/order/slice';
 import { Amount } from '@alfalab/core-components/amount';
 import { UserDataType } from 'types/Order';
 import { DELIVERY_TYPE } from 'constants/order';
+import * as Yup from 'yup';
+import { OrderConfirmed } from './OrderConfirmed';
 
 export const Order: FC = () => {
   const dispatch = useAppDispatch();
@@ -26,12 +28,20 @@ export const Order: FC = () => {
   const totalPrice = useAppSelector(totalPriceSelector);
   const deliveryPrice = useAppSelector(orderDeliverySelector);
   const userData = useAppSelector(orderUserDataSelector);
+  const isLoading = useAppSelector(orderLoading);
+  const isConfirmed = useAppSelector(orderConfirmed);
+
+  if (isConfirmed) {
+    return (<OrderConfirmed />);
+  }
 
   const handleClose = () => {
     dispatch(orderActions.setIsOpen(false));
   };
 
-  const handleSubmit = () => { };
+  const handleSubmit = () => {
+    dispatch(sendOrder());
+  };
 
   const handleChange = (formik: FormikProps<UserDataType>, e: React.ChangeEvent<HTMLInputElement>) => {
     formik.handleChange(e);
@@ -68,13 +78,42 @@ export const Order: FC = () => {
               <Formik
                 initialValues={userData}
                 onSubmit={handleSubmit}
+                validateOnChange={false}
+                validationSchema={
+                  Yup.object().shape({
+                    name: Yup
+                      .string()
+                      .min(5, "Минимальная длина 5 символов")
+                      .required('поле ФИО обязательно для заполнения'),
+                    email: Yup
+                      .string()
+                      .email('поле email должно соответствовать формату')
+                      .required('поле email обязательно для заполнения'),
+                    phone: Yup
+                      .string()
+                      .min(16, "поле телефон обязательно для заполнения")
+                      .required('поле телефон обязательно для заполнения'),
+                    address: Yup
+                      .string()
+                      .when('deliveryType', (value) => {
+                        return +value !== 0
+                          ? Yup.string().required('поле адрес обязательно для заполнения')
+                          : Yup.string();
+                      }),
+                    policy: Yup
+                      .boolean()
+                      .required('для продолжения необходимо согласиться с политикой конфиденциальности'),
+                  })
+                }
               >
                 {formik => (
                   <Form className={cls.order__form}>
                     <Field
                       as={Input}
+                      className={cls.order__form_control}
                       fieldClassName={cls.order__form_field}
                       inputClassName={cls.order__form_input}
+                      addonsClassName={cls.order__form_err}
                       block={true}
                       size='m'
                       labelView='outer'
@@ -83,11 +122,14 @@ export const Order: FC = () => {
                       name='name'
                       type='text'
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(formik, e)}
+                      error={formik.errors.name}
                     />
                     <Field
                       as={Input}
+                      className={cls.order__form_control}
                       fieldClassName={cls.order__form_field}
                       inputClassName={cls.order__form_input}
+                      addonsClassName={cls.order__form_err}
                       block={true}
                       size='m'
                       labelView='outer'
@@ -95,24 +137,30 @@ export const Order: FC = () => {
                       placeholder='example@site.ru'
                       name='email'
                       type='email'
+                      error={formik.errors.email}
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(formik, e)}
                     />
                     <Field
                       as={PhoneInput}
+                      className={cls.order__form_control}
                       fieldClassName={cls.order__form_field}
                       inputClassName={cls.order__form_input}
+                      addonsClassName={cls.order__form_err}
                       block={true}
                       size='m'
                       labelView='outer'
                       label={<Label>Телефон</Label>}
                       placeholder='+7 000 000-00-00'
                       name='phone'
+                      error={formik.errors.phone}
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(formik, e)}
                     />
                     <Field
                       as={Input}
+                      className={cls.order__form_control}
                       fieldClassName={cls.order__form_field}
                       inputClassName={cls.order__form_input}
+                      addonsClassName={cls.order__form_err}
                       block={true}
                       size='m'
                       labelView='outer'
@@ -120,6 +168,7 @@ export const Order: FC = () => {
                       placeholder='Индекс, город, улица, дом, квартира'
                       name='address'
                       type='text'
+                      error={formik.errors.address}
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(formik, e)}
                     />
                     <Field
@@ -164,13 +213,20 @@ export const Order: FC = () => {
                       className={cls.order__form_group}
                       label={<Label>Оплата</Label>}
                       error={false}
-                      value={'alfabank'}
-                      name='payment'
-                      id='payment'
+                      value={'Банковская карта'}
+                      paymentType='paymentType'
+                      id='paymentType'
                     >
-                      <Field as={Radio} label={<Label className={cls.order__form_label_s}>Банковская карта</Label>} value='alfabank' />
+                      <Field as={Radio} label={<Label className={cls.order__form_label_s}>Банковская карта</Label>} value='Банковская карта' />
                     </Field>
-                    <Button className={cls.order__form_button} block={true} type='submit'>Дальше</Button>
+                    <Button
+                      className={cls.order__form_button}
+                      block={true}
+                      loading={isLoading}
+                      type='submit'
+                    >
+                      Отправить заказ
+                    </Button>
                   </Form>
                 )}
               </Formik>
@@ -193,6 +249,6 @@ export const Order: FC = () => {
           </Grid.Row>
         </div>
       </ModalResponsive.Content>
-    </ModalResponsive>
+    </ModalResponsive >
   );
 };

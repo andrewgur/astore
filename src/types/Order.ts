@@ -1,10 +1,16 @@
+import { DELIVERY_TYPE } from 'constants/order';
+import { ProductAPIType } from './Product';
+
 export type UserDataType = {
   name: string;
   email: string;
   phone: string;
   address: string;
-  delivery: '0' | '300' | '350';
+  delivery: keyof typeof DELIVERY_TYPE;
   comment: string;
-  payment: string;
-  policy?: boolean;
+  paymentType: string;
+};
+
+export type OrderAPIType = UserDataType & {
+  products: ProductAPIType[];
 };
