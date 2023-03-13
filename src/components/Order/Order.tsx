@@ -19,7 +19,7 @@ import { Amount } from '@alfalab/core-components/amount';
 import { UserDataType } from 'types/Order';
 import { DELIVERY_TYPE } from 'constants/order';
 import * as Yup from 'yup';
-import { OrderConfirmed } from './OrderConfirmed';
+import { OrderConfirmed } from './OrderConfirmed/OrderConfirmed';
 
 export const Order: FC = () => {
   const dispatch = useAppDispatch();
